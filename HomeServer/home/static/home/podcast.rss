@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+     xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
+<channel>
+  <googleplay:owner>michael@gpmaga.com</googleplay:owner>
+  <language>en-us</language>
+  <googleplay:image href="https://daisy-1501c.web.app/coolcroppedsquare.jpg"/>
+  <itunes:image href="https://daisy-1501c.web.app/coolcroppedsquare.jpg"/>
+  <itunes:explicit>yes</itunes:explicit>
+  <itunes:category text="Politics">
+  <itunes:category text="Proleteriat" />
+  </itunes:category>
+  <itunes:owner>
+    <itunes:email>michael@gpmaga.com</itunes:email>
+  </itunes:owner>
+  <title>Mikey and Grant Podcast</title>
+  <link>gpmaga.com</link>
+  <description>The world's best puggle care podcast</description>
+  <item>
+    <title>Episode 1: starting off strong</title>
+    <link>http://76.102.69.17/podcast-1.mp3</link>
+    <description>Listen as mikey and grant lose their jobs</description>
+    <enclosure url="http://76.102.69.17/podcast-1.mp3"
+           type="audio/mpeg" length="34216300"/>
+    <googleplay:explicit>yes</googleplay:explicit>
+    <itunes:explicit>yes</itunes:explicit>
+    <pubDate>Sunday, 25 Oct 2020 16:07:00 EST</pubDate>
+  </item>
+  <item>
+    <title>Episode 2: Hello from election limbo</title>
+    <link>http://76.102.69.17/podcast-2.mp3</link>
+    <description>We don't know what's happening, and no one else does either. Thank you to our sponsor cementsheds.com</description>
+    <enclosure url="http://76.102.69.17/podcast-2.mp3"
+           type="audio/mpeg" length="34216300"/>
+    <googleplay:explicit>yes</googleplay:explicit>
+    <itunes:explicit>yes</itunes:explicit>
+    <pubDate>Sunday, 8 Nov 2020 16:07:00 EST</pubDate>
+  </item>
+</channel>
+
+</rss>

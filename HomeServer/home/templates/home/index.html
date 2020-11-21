@@ -1,0 +1,42 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href="{% static 'home/style.css' %}">
+    <title>Daisy</title>
+</head>
+<body>
+    <div class='head'>
+        <h1>Daisy</h1>
+        <h2>Puggle on the Move</h2>
+    </div>
+    <div class='divider'>
+        She does it all
+    </div>
+    <hr/>
+    <div class='card-container'>
+        <div class='card-col'>
+            <div class='card'>
+                <h3>She Hikes</h3>
+                <img src="{% static 'home/mountain.jpg' %}"/>
+            </div>
+            <div class='card'>
+                <h3>She Makes Friends</h3>
+                <img src="{% static 'home/riley1.jpg' %}"/>
+            </div>
+        </div>
+        <div class='card-col'>
+            <div class='card'>
+                <h3>She Sits</h3>
+                <img src="{% static 'home/sitting.jpg' %}"/>
+            </div>
+            <div class='card'>
+                <h3>And Everything In Between</h3>
+                <img src="{% static 'home/riley2.jpg' %}"/>
+            </div>
+        </div>
+    </div>
+    <div class='foot'>
+        <h1>Move Forward With Daisy for Virginia District 6 Representative</h1>
+        <a href='https://venmo.com/code?user_id=1803248931438592047' class='btn'>Donate Here</a>
+    </div>
+<body>
