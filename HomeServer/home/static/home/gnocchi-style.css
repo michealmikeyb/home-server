@@ -1,0 +1,44 @@
+body{
+    font-family: Snell Roundhand, cursive;
+}
+h1{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position-x: center;
+    vertical-align: center;
+    font-size: 12rem;
+    text-align: center;
+    padding-top: 25%;
+}
+
+.section{
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 25%;
+}
+h2 {
+    padding-top: 10%;
+    font-size: 10rem;
+}
+h3 {
+    padding-top: 10%;
+    font-size: 5rem;
+}
+p {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.splitter{
+    display: flex;
+}
+.split{
+    width: 50%;
+}
+h4{
+    font-size: 7.5rem;
+}
