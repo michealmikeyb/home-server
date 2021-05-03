@@ -12,6 +12,8 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 .mySlides {display:none}
 .w3-tag, .fa {cursor:pointer}
 .w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
+
+.count {text-align:center}
 </style>
 <body>
 
@@ -190,26 +192,15 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
     <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Sign The Petition</span>
   </div>
 
-  <form class="w3-container" action="/action_page.php" target="_blank">
+  <div class="w3-container">
+    {% csrf_token %}
     <div class="w3-section">
       <label>Name</label>
-      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" name="Name" required>
+      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" id="participantName" required>
     </div>
-    <div class="w3-section">
-      <label>Email</label>
-      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" name="Email" required>
-    </div>
-    <div class="w3-section">
-      <label>Subject</label>
-      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="Subject" required>
-    </div>
-    <div class="w3-section">
-      <label>Message</label>
-      <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" name="Message" required>
-    </div>
-    <button type="submit" class="w3-button w3-block w3-black">Send</button>
-  </form>
-
+    <button type="submit" class="w3-button w3-block w3-black" id="submit">Send</button>
+  </div>
+  <h3 class="count">Total Signed: <div id="poll-total"></div>
 </div>
 
 <!-- Footer -->
@@ -257,6 +248,45 @@ function showDivs(n) {
   x[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " w3-white";
 }
+
+const poll_url = "{% url 'poll' %}"
+const poll_name = "ban-seagulls"
+var csrftoken = '{{ csrf_token }}';
+
+updatePoll()
+console.log(csrftoken)
+// get poll
+function updatePoll (){
+  fetch(poll_url+"?name="+poll_name)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    var total = document.getElementById('poll-total');
+    total.textContent = data.total
+  })
+  .catch(function () {
+    console.log('Booo');
+  });
+}
+
+//on submit
+document.getElementById('submit').addEventListener("click", () => {
+  var participant_name = document.getElementById("participantName").value
+  var data = {
+    'name': poll_name,
+  }
+  const request = new Request(
+    poll_url,
+    {headers: {'X-CSRFToken': csrftoken}}
+  );
+  fetch(request, {
+    method: "POST", 
+    body: JSON.stringify(data)
+  }).then(res => {
+    updatePoll()
+  });
+})
 </script>
 
 </body>

@@ -27,7 +27,10 @@ SECRET_KEY = 'fm+u-6-w1gs@uu8i56cg66xuk86a8_#w(c_^h!3u2s$0&tw!)4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'gpmaga.com',
+]
 
 
 # Application definition
