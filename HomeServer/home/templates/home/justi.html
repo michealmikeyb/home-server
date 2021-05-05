@@ -1,0 +1,160 @@
+{% load static %}<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<link href="{% static 'home/justi.css' %}" rel="stylesheet"/>
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+></script>
+
+<body>
+    <button id='post-button' class='btn btn-light'>Post</button>
+    <h1 style>JustI</h1>
+    <div class="search-container">
+        <div class="input-group">
+            <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Search</label>
+            </div>
+            <button id="search-button" type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div id="content"></div>
+</body>
+
+<script>
+    const recipe_url = "{% url 'recipe' %}"
+    var csrftoken = '{{ csrf_token }}';
+
+    const searchButton = document.getElementById('search-button');
+    const postButton = document.getElementById('post-button');
+    const searchInput = document.getElementById('search-input');
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    searchButton.addEventListener('click', () => {
+        const inputValue = searchInput.value;
+        fetch(recipe_url+"?name="+inputValue)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                var list_element = document.getElementById('content');
+                var list_text = ""
+                for (i in data.recipes) {
+                    const recipe = data.recipes[i]
+                    var recipe_text = `<div class='recipe card'><h2>${recipe.name}</h2><h4>Ingredients</h4><ul class="list-group">`
+                    for (j in recipe.ingredients) {
+                        const ingredient = recipe.ingredients[j]
+                        recipe_text += `<li class='ingredient list-group-item'>${ingredient}</li>`
+                    }
+
+                    recipe_text += "</ul><h4>Steps</h4><ul class='list-group'>"
+                    for (j in recipe.steps) {
+                        const step = recipe.steps[j]
+                        recipe_text += `<li class='step list-group-item'>${step}</li>`
+                    }
+                    recipe_text += "</ul></div>"
+
+                    list_text += recipe_text
+                }
+                list_element.innerHTML = list_text
+            })
+            .catch(function () {
+                console.log('Booo');
+        });
+    });
+
+    postButton.addEventListener('click', () => {
+        var content_element = document.getElementById('content');
+        var recipe = {name: '', ingredients: [], steps: []}
+
+        content_element.innerHTML = `
+            <div class='recipe card'>
+                <div class="form-outline recipe-input">
+                    <input type="text" id="recipe-name" class="form-control form-control-lg" />
+                    <label class="form-label" for="formControlLg">Name</label>
+                </div>
+                <h4>Ingredients</h4>
+                <ul id='recipe-ingredients' class='list-group'>
+                </ul>
+                <div class="form-outline recipe-input">
+                    <input type="text" id="ingredient" class="form-control" />
+                    <label class="form-label" for="formControlDefault">Ingredient</label>
+                    <button class='btn btn-primary' id='add-ingredient'>+</button>
+                </div>
+                <h4>Steps</h4>
+                <ul id='recipe-steps' class='list-group'>
+                </ul>
+                <div class="form-outline recipe-input">
+                    <textarea class="form-control" id="step" rows="4"></textarea>
+                    <label class="form-label" for="textAreaExample">Step</label>
+                    <button class='btn btn-primary' id='add-step'>+</button>
+                </div>
+                <button class='btn btn-success' id='submit-recipe'>Post</button>
+            </div>
+        `
+
+        const addIngredientButton = document.getElementById('add-ingredient');
+        const addStepButton = document.getElementById('add-step');
+        const submitButton = document.getElementById('submit-recipe');
+
+        addIngredientButton.addEventListener('click', () => {
+            const ingredientList = document.getElementById('recipe-ingredients');
+            const ingredient = document.getElementById('ingredient').value
+            recipe.ingredients.push(ingredient)
+            ingredientList.innerHTML = ingredientList.innerHTML + `<li class='ingredient list-group-item'>${ingredient}</li>`
+            document.getElementById('ingredient').value = ''
+        });
+
+        addStepButton.addEventListener('click', () => {
+            const stepList = document.getElementById('recipe-steps');
+            const step = document.getElementById('step').value
+            recipe.steps.push(step)
+            stepList.innerHTML = stepList.innerHTML + `<li class='step list-group-item'>${step}</li>`
+            document.getElementById('step').value = ''
+        });
+
+        submitButton.addEventListener('click', () => {
+            var recipe_name = document.getElementById("recipe-name").value
+            if (recipe_name == '') {
+                alert('Please enter a recipe name')
+            }
+            else {
+                recipe.name = recipe_name
+                const request = new Request(
+                    recipe_url,
+                    {headers: {'X-CSRFToken': csrftoken}}
+                );
+                fetch(request, {
+                    method: "POST", 
+                    body: JSON.stringify(recipe)
+                }).then(async res => {
+                    content_element.innerHTML = '<div class="recipe card"><h3>Succesfully added recipe</h3></div>'
+                    await sleep(5000)
+                    content_element.innerHTML = ''
+                });
+
+            }
+        });
+
+    });
+</script>

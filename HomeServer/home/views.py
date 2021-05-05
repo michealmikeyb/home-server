@@ -9,3 +9,6 @@ def gnocchi(request):
 
 def banSeagulls(request):
     return render(request, 'home/banSeagulls.html')
+
+def justi(request):
+    return render(request, 'home/justi.html')
