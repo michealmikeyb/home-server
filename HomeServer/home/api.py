@@ -1,11 +1,17 @@
 import json
 
 from django.http import JsonResponse
+import asyncio
 
 from home.models import Poll
 from home.models import Recipe
 from home.models import Ingredient
 from home.models import Step
+from home.utils import get_switch
+from home.utils import get_all_switches
+
+
+SWITCHES = ['lamp', 'string lights']
 
 def poll(request):
     if request.method == 'GET':
@@ -68,3 +74,34 @@ def recipe(request):
             
         else:
             return JsonResponse({'error': 'no name given'})
+
+def switch(request):
+    if request.method == 'POST':
+        post_data = json.loads(request.body.decode("utf-8"))
+        plug_name = post_data.get('name', None)
+        try:
+            switch = get_switch(plug_name)
+        except ValueError:
+            return JsonResponse({'error': 'invalid name'})
+        
+        command = post_data.get('command', None)
+        if command == 'on':
+            if switch.is_on:
+                return JsonResponse({'error': 'already on'})
+            asyncio.run(switch.turn_on())
+            return JsonResponse({'success': f"{plug_name} turned on"})
+
+        elif command == 'off':
+            if not switch.is_on:
+                return JsonResponse({'error': 'already off'})
+            asyncio.run(switch.turn_off())
+            return JsonResponse({'success': f"{plug_name} turned off"})
+        else:
+            print(command)
+
+    if request.method == 'GET':
+        switches = [{'name': switch.alias, 'is_on': switch.is_on} for switch in get_all_switches()]
+        return JsonResponse({'switches': switches})
+
+
+

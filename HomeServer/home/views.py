@@ -12,3 +12,6 @@ def banSeagulls(request):
 
 def justi(request):
     return render(request, 'home/justi.html')
+
+def homeControl(request):
+    return render(request, 'home/homeControl.html')

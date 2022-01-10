@@ -1,0 +1,110 @@
+{% load static %}<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<link href="{% static 'home/homeControl.css' %}" rel="stylesheet"/>
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+></script>
+
+<body>
+    <h1 style>Home Control</h1>
+    <div id="content"></div>
+</body>
+
+<script>
+    const switch_url = "{% url 'switch' %}"
+    var csrftoken = '{{ csrf_token }}';
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    console.log('a')
+    fetch(switch_url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            var list_element = document.getElementById('content');
+            var list_text = ""
+            for (i in data.switches) {
+                var cur_switch = data.switches[i]
+                console.log(cur_switch)
+                if (cur_switch.is_on) {
+                    var switch_text = `<div class='switch-container'><button class='btn-lg btn-success is-on switch-button'>${cur_switch.name}</button></div>`
+                }
+                else {
+                    var switch_text = `<div class='switch-container'><button class='btn-lg btn-danger is-off switch-button'>${cur_switch.name}</button></div>`
+                }
+
+                list_text += switch_text
+            }
+            list_element.innerHTML = list_text
+
+            var turnOff = function(event) {
+                button = event.target
+                var payload = {name: button.innerHTML, command: 'off'}
+                const request = new Request(
+                    switch_url,
+                    {headers: {'X-CSRFToken': csrftoken}}
+                );
+                fetch(request, {
+                    method: "POST", 
+                    body: JSON.stringify(payload)
+                }).then(async res => {
+                    button.classList.add('btn-danger')
+                    button.classList.add('is-off')
+                    button.classList.remove('btn-success')
+                    button.classList.remove('is-on')
+                    button.removeEventListener('click', turnOff)
+                    button.addEventListener('click', turnOn, false)
+                });
+            };
+
+            var turnOn = function(event) {
+                button = event.target
+                var payload = {name: button.innerHTML, command: 'on'}
+                const request = new Request(
+                    switch_url,
+                    {headers: {'X-CSRFToken': csrftoken}}
+                );
+                fetch(request, {
+                    method: "POST", 
+                    body: JSON.stringify(payload)
+                }).then(async res => {
+                    button.classList.remove('btn-danger')
+                    button.classList.remove('is-off')
+                    button.classList.add('btn-success')
+                    button.classList.add('is-on')
+                    button.removeEventListener('click', turnOn)
+                    button.addEventListener('click', turnOff, false)
+                });
+            };
+
+            var on_buttons = document.getElementsByClassName("is-on");
+            for (var i = 0; i < on_buttons.length; i++) {
+                on_buttons[i].addEventListener('click', turnOff, false);
+            }
+
+            var off_buttons = document.getElementsByClassName("is-off");
+            for (var i = 0; i < off_buttons.length; i++) {
+                off_buttons[i].addEventListener('click', turnOn, false);
+            }
+        });
+
+</script>
