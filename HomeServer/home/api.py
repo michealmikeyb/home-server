@@ -2,6 +2,7 @@ import json
 
 from django.http import JsonResponse
 import asyncio
+from kasa import SmartPlug
 
 from home.models import Poll
 from home.models import Recipe
@@ -11,7 +12,10 @@ from home.utils import get_switch
 from home.utils import get_all_switches
 
 
-SWITCHES = ['lamp', 'string lights']
+SWITCHES = [
+    {'alias': 'lamp', 'ip': '192.168.1.123'}, 
+    {'alias': 'string lights', 'ip': '192.168.1.106'}
+]
 
 def poll(request):
     if request.method == 'GET':
@@ -100,7 +104,14 @@ def switch(request):
             print(command)
 
     if request.method == 'GET':
-        switches = [{'name': switch.alias, 'is_on': switch.is_on} for switch in get_all_switches()]
+        switches = get_all_switches()
+        if not switches:
+            switches = []
+            for s in SWITCHES:
+                switch = SmartPlug(s['ip'])
+                asyncio.run(switch.update())
+                switches.append(switch)
+        switches = [{'name': switch.alias, 'is_on': switch.is_on} for switch in switches]
         return JsonResponse({'switches': switches})
 
 
