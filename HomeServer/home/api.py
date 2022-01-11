@@ -10,12 +10,9 @@ from home.models import Ingredient
 from home.models import Step
 from home.utils import get_switch
 from home.utils import get_all_switches
+from home.utils import SWITCHES
 
 
-SWITCHES = [
-    {'alias': 'lamp', 'ip': '192.168.1.123'}, 
-    {'alias': 'string lights', 'ip': '192.168.1.106'}
-]
 
 def poll(request):
     if request.method == 'GET':

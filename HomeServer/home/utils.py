@@ -2,11 +2,21 @@ import asyncio
 from kasa import Discover
 
 
+SWITCHES = [
+    {'alias': 'lamp', 'ip': '192.168.1.123'}, 
+    {'alias': 'string lights', 'ip': '192.168.1.106'}
+]
+
 def get_switch(switch_name: str):
     found_devices = asyncio.run(Discover.discover())
     device = [dev for addr, dev in found_devices.items() if dev.alias == switch_name]
     if len(device) != 1:
-        raise ValueError("Invalid Name")
+        if switch_name not in [s['alias'] for s in SWITCHES]:
+            raise ValueError("Invalid Name")
+        s = [s for s in SWITCHES if s['alias'] == switch_name]
+        switch = SmartPlug(s['ip'])
+        asyncio.run(switch.update())
+        return switch
     return device[0]
 
 def get_all_switches():
