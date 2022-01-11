@@ -14,7 +14,7 @@ def get_switch(switch_name: str):
     if len(device) != 1:
         if switch_name not in [s['alias'] for s in SWITCHES]:
             raise ValueError("Invalid Name")
-        s = [s for s in SWITCHES if s['alias'] == switch_name]
+        s = [s for s in SWITCHES if s['alias'] == switch_name][0]
         switch = SmartPlug(s['ip'])
         asyncio.run(switch.update())
         return switch
