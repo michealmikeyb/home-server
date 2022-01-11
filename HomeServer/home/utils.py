@@ -1,5 +1,6 @@
 import asyncio
 from kasa import Discover
+from kasa import SmartPlug
 
 
 SWITCHES = [
