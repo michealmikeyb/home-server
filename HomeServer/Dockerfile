@@ -6,6 +6,9 @@ RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
 RUN apt-get install pkg-config -y
 RUN apt-get install libcairo2-dev -y
+RUN apt-get install openssl -y
+RUN apt-get install libjpeg-dev -y
+RUN apt-get install zlib1g-dev -y
 
 RUN mkdir /app
 COPY ./requirements.txt /app
