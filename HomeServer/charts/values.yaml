@@ -52,7 +52,7 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: gpmaga-tls
+    - secretName: gpmaga
       hosts:
         - gpmaga.com
 
