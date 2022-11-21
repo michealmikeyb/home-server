@@ -11,7 +11,8 @@ spec:
     - gpmaga.com
     secretName: quickstart-example-tls
   rules:
-  - http:
+  - host: gpmaga.com
+    http:
       paths:
       - path: /
         pathType: Prefix
