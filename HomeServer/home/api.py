@@ -3,7 +3,6 @@ import json
 from django.http import JsonResponse
 import asyncio
 from kasa import SmartPlug
-from django.views.decorators.csrf import csrf_exempt
 
 from home.models import Poll
 from home.models import Recipe
@@ -77,7 +76,6 @@ def recipe(request):
         else:
             return JsonResponse({'error': 'no name given'})
 
-@csrf_exempt
 def switch(request):
     if request.method == 'POST':
         post_data = json.loads(request.body.decode("utf-8"))
