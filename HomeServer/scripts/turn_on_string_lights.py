@@ -5,19 +5,8 @@ from threading import Thread
 def turn_on_lights(light_name):
     sesh = Session()
     url = 'http://homeserver/switch'
-    threads = []
-    t = Thread(
-        target=sesh.post, 
-        kwargs={
-            'url': url, 
-            'json': {'name': light_name, 'command': 'on'}, 
-            'verify': False, 
-            }
-        )
-    t.start()
-    threads.append(t)
-    for thread in threads:
-        thread.join()
+    res = sesh.post(url=url, json={'name': light_name, 'command': 'on'}, verify=False)
+    print(res.content)
 
 
 if __name__ == '__main__':
