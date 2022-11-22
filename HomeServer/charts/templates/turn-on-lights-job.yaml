@@ -9,6 +9,6 @@ spec:
       - name: turn-on-job
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["python",  "/app/scripts/turn_on_string_lights.py"]
+        command: ["python3",  "/app/scripts/turn_on_string_lights.py"]
       restartPolicy: Never
   backoffLimit: 0
