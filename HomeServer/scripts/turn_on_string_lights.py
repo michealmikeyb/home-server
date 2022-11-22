@@ -9,6 +9,7 @@ def turn_on_lights(light_name):
     home_control_url = 'http://homeserver/home-control'
     sesh.get(url=home_control_url, verify=False)
     threads = []
+    print(sesh.cookies)
     t = Thread(
         target=sesh.post, 
         kwargs={
