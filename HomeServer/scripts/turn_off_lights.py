@@ -3,11 +3,8 @@ from threading import Thread
 
 
 def turn_off_lights():
-    csrf_key = 'X-CSRFToken'
     sesh = Session()
     url = 'http://homeserver/switch'
-    home_control_url = 'http://homeserver/home-control'
-    sesh.get(url=home_control_url, verify=False)
     res = sesh.get(url=url, verify=False)
     switches = res.json()['switches']
     threads = []
@@ -18,8 +15,7 @@ def turn_off_lights():
                 kwargs={
                     'url': url, 
                     'json': {'name': switch['name'], 'command': 'off'}, 
-                    'verify': False, 
-                    'headers': {csrf_key: sesh.cookies['csrftoken'], 'Referer': home_control_url}
+                    'verify': False
                     }
                 )
             t.start()
