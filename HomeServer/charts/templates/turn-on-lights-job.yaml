@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: turn-on-lights
 spec:
-  schedule: "36 23 * * *"
+  schedule: "00 17 * * *"
   jobTemplate:
     spec:
       template:
