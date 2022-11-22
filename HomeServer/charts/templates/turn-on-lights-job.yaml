@@ -1,14 +1,16 @@
 apiVersion: batch/v1
-kind: Job
+kind: CronJob
 metadata:
-  name: turn-on
+  name: turn-on-lights
 spec:
-  template:
+  schedule: "36 23 * * *"
+  jobTemplate:
     spec:
-      containers:
-      - name: turn-on-job
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["python3",  "/app/scripts/turn_on_string_lights.py"]
-      restartPolicy: Never
-  backoffLimit: 0
+      template:
+        spec:
+          containers:
+          - name: turn-on-lights
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command: ["python3",  "/app/scripts/turn_on_string_lights.py"]
+          restartPolicy: Never
