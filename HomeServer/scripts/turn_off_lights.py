@@ -5,8 +5,8 @@ from threading import Thread
 def turn_off_lights():
     csrf_key = 'X-CSRFToken'
     sesh = Session()
-    url = 'https://gpmaga.com/switch'
-    home_control_url = 'https://gpmaga.com/home-control'
+    url = 'http://homeserver/switch'
+    home_control_url = 'http://homeserver/home-control'
     sesh.get(url=home_control_url, verify=False)
     res = sesh.get(url=url, verify=False)
     switches = res.json()['switches']
