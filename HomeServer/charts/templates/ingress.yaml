@@ -9,9 +9,20 @@ spec:
   tls:
   - hosts:
     - gpmaga.com
+    - api.stakswipe.com
     secretName: quickstart-example-tls
   rules:
   - host: gpmaga.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: homeserver
+            port:
+              number: 80
+  - host: api.stakswipe.com
     http:
       paths:
       - path: /
