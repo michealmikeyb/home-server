@@ -11,6 +11,7 @@ spec:
     - gpmaga.com
     - api.stakswipe.com
     - api.celniker.com
+    - api.mitchellvault.com
     secretName: quickstart-example-tls
   rules:
   - host: gpmaga.com
@@ -41,5 +42,15 @@ spec:
         backend:
           service:
             name: cel-vault
+            port:
+              number: 80
+  - host: api.mitchellvault.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mitchell-vault
             port:
               number: 80
