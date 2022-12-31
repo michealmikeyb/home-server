@@ -31,9 +31,9 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: homeserver
+            name: ffv
             port:
-              number: 80
+              number: 8080
   - host: api.celniker.com
     http:
       paths:
