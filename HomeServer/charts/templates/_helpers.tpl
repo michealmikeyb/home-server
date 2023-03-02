@@ -60,3 +60,16 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+{{- define "helpers.list-env-variables"}}
+{{- range $key, $val := .Values.env.secret }}
+- name: {{ $val }}
+  valueFrom:
+    secretKeyRef:
+      name: postgres-postgresql
+      key: {{ $key }}
+{{- end}}
+{{- range $key, $val := .Values.env.normal }}
+- name: {{ $key }}
+  value: {{ $val }}
+{{- end}}
+{{- end }}

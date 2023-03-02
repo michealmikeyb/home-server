@@ -86,3 +86,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+env:
+  normal:
+    PGHOST: postgres
+    PGNAME: homeserver
+  secret: 
+    password: PGPASSWORD
