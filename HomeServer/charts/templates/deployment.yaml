@@ -34,6 +34,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["gunicorn"  , "-b", "0.0.0.0:80", "HomeServer.wsgi"]
+          env:
+            {{- include "helpers.list-env-variables" . | indent 12 }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
