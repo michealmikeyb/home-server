@@ -10,6 +10,11 @@ RUN apt-get install openssl -y
 RUN apt-get install libjpeg-dev -y
 RUN apt-get install zlib1g-dev -y
 RUN apt-get install libssl-dev -y
+RUN apt-get install gcc -y
+RUN apt-get install libc-dev -y
+RUN apt-get install postgresql -y
+RUN apt-get install postgresql-contrib -y
+RUN apt-get install libpq-dev -y
 
 RUN mkdir /app
 COPY ./requirements.txt /app
@@ -17,5 +22,4 @@ RUN pip install -r /app/requirements.txt
 
 COPY ./ /app
 WORKDIR /app
-RUN python3 /app/manage.py migrate
 CMD ["gunicorn"  , "-b", "0.0.0.0:80", "HomeServer.wsgi"]
