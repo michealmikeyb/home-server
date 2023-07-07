@@ -18,3 +18,6 @@ def justi(request):
 
 def homeControl(request):
     return render(request, 'home/homeControl.html')
+
+def truth(request):
+    return render(request, 'home/fediversePredictions.html')
