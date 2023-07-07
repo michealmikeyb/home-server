@@ -10,7 +10,7 @@ spec:
   - hosts:
     - gpmaga.com
     - api.stakswipe.com
-    - api.celniker.com
+    # - api.celniker.com
     - api.mitchellvault.com
     - api.celniker.xyz
     secretName: quickstart-example-tls
@@ -35,16 +35,16 @@ spec:
             name: ffv
             port:
               number: 80
-  - host: api.celniker.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: cel-vault
-            port:
-              number: 80
+  # - host: api.celniker.com
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: cel-vault
+  #           port:
+  #             number: 80
   - host: api.celniker.xyz
     http:
       paths:
