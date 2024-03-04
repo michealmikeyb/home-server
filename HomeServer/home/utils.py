@@ -4,8 +4,8 @@ from kasa import SmartPlug
 
 
 SWITCHES = [
-    {'alias': 'lamp', 'ip': '192.168.1.122'}, 
-    {'alias': 'string lights', 'ip': '192.168.1.153'}
+    {'alias': 'lamp', 'ip': '10.32.65.122'}, 
+    {'alias': 'string lights', 'ip': '10.32.65.153'}
 ]
 
 def get_switch(switch_name: str):

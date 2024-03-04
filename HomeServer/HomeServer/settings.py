@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'gpmaga.com',
     'api.stakswipe.com',
+    '10.32.65.104',
     '192.168.1.104',
     '127.0.0.1',
     '136.25.51.84', 
