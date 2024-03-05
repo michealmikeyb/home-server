@@ -9,10 +9,10 @@ spec:
   tls:
   - hosts:
     - gpmaga.com
-    - api.stakswipe.com
+    # - api.stakswipe.com
     # - api.celniker.com
-    - api.mitchellvault.com
-    - api.celniker.xyz
+    # - api.mitchellvault.com
+    # - api.celniker.xyz
     secretName: quickstart-example-tls
   rules:
   - host: gpmaga.com
