@@ -25,16 +25,16 @@ spec:
             name: homeserver
             port:
               number: 80
-  - host: api.stakswipe.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: ffv
-            port:
-              number: 80
+  # - host: api.stakswipe.com
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: ffv
+  #           port:
+  #             number: 80
   # - host: api.celniker.com
   #   http:
   #     paths:
@@ -45,23 +45,23 @@ spec:
   #           name: cel-vault
   #           port:
   #             number: 80
-  - host: api.celniker.xyz
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: cel-vault
-            port:
-              number: 80
-  - host: api.mitchellvault.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: mitchell-vault
-            port:
-              number: 80
+  # - host: api.celniker.xyz
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: cel-vault
+  #           port:
+  #             number: 80
+  # - host: api.mitchellvault.com
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: mitchell-vault
+  #           port:
+  #             number: 80
