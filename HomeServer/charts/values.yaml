@@ -92,3 +92,4 @@ env:
     PGNAME: homeserver
   secret: 
     password: PGPASSWORD
+createPostgres: true
