@@ -4,7 +4,7 @@ from kasa import SmartPlug
 
 
 SWITCHES = [
-    {'alias': 'lamp', 'ip': '10.32.65.122'}, 
+    {'alias': 'bedroom lights', 'ip': '10.32.65.122'}, 
     {'alias': 'string lights', 'ip': '10.32.65.153'}
 ]
 
