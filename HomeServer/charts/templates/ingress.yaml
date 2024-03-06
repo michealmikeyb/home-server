@@ -10,6 +10,7 @@ spec:
   - hosts:
     - gpmaga.com
     - stakswipe.com
+    - mitchellcookbook.com
     # - api.stakswipe.com
     # - api.celniker.com
     # - api.mitchellvault.com
@@ -27,6 +28,16 @@ spec:
             port:
               number: 80
   - host: stakswipe.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: recipes
+            port:
+              number: 8080
+  - host: mitchellcookbook.com
     http:
       paths:
       - path: /
