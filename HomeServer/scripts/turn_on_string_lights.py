@@ -39,7 +39,8 @@ def main():
     print(f'waiting {START_AFTER_SUNSET_MIN} minutes after sunset at {start_time}...')                                             
     time.sleep(WAIT_INTERVAL)
   print('turning on string lights')
-  turn_on_lights('string lights')                                                            
+  turn_on_lights('string lights')
+  turn_on_lights('bedroom lights')                                                          
 
 if __name__ == '__main__':                                                      
   main()
