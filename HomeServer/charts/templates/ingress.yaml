@@ -9,6 +9,7 @@ spec:
   tls:
   - hosts:
     - gpmaga.com
+    - stakswipe.com
     # - api.stakswipe.com
     # - api.celniker.com
     # - api.mitchellvault.com
@@ -25,16 +26,16 @@ spec:
             name: homeserver
             port:
               number: 80
-  # - host: api.stakswipe.com
-  #   http:
-  #     paths:
-  #     - path: /
-  #       pathType: Prefix
-  #       backend:
-  #         service:
-  #           name: ffv
-  #           port:
-  #             number: 80
+  - host: stakswipe.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: recipes
+            port:
+              number: 8080
   # - host: api.celniker.com
   #   http:
   #     paths:
