@@ -11,6 +11,7 @@ spec:
     - gpmaga.com
     - stakswipe.com
     - mitchellcookbook.com
+    - grantmoisturemeter.com
     # - api.stakswipe.com
     # - api.celniker.com
     # - api.mitchellvault.com
@@ -25,6 +26,16 @@ spec:
         backend:
           service:
             name: homeserver
+            port:
+              number: 80
+  - host: grantmoisturemeter.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: threesixty
             port:
               number: 80
   - host: stakswipe.com
