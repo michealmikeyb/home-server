@@ -92,4 +92,6 @@ env:
     PGNAME: homeserver
   secret: 
     password: PGPASSWORD
+    tapo_username: TAPO_USERNAME
+    tapo_password: TAPO_PASSWORD
 createPostgres: true
