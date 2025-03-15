@@ -10,7 +10,6 @@ from home.models import Ingredient
 from home.models import Step
 from home.utils import get_switch
 from home.utils import get_all_switches
-from home.utils import SWITCHES
 
 
 
@@ -102,12 +101,6 @@ def switch(request):
 
     if request.method == 'GET':
         switches = get_all_switches()
-        if not switches:
-            switches = []
-            for s in SWITCHES:
-                switch = SmartPlug(s['ip'])
-                asyncio.run(switch.update())
-                switches.append(switch)
         switches = [{'name': switch.alias, 'is_on': switch.is_on} for switch in switches]
         return JsonResponse({'switches': switches})
 
