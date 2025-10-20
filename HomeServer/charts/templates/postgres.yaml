@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 1800
       containers:
       - name: postgres
-        image: docker.io/library/postgres:13
+        image: docker.io/library/postgres:18
         imagePullPolicy: Always
         ports:
         - containerPort: 5432
@@ -53,7 +53,7 @@ spec:
         # the stateful pod volumes.
         volumeMounts:
         - name: postgres-data
-          mountPath: /var/lib/postgresql/data
+          mountPath: /var/lib/postgresql/18/data
   # These are converted to volume claims by the controller
   # and mounted at the paths mentioned above.
   # do not use these in production until ssd GCEPersistentDisk or other ssd pd

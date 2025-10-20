@@ -19,15 +19,17 @@ WAIT_INTERVAL = 300
 def turn_on_lights(light_name):
     csrf_key = 'X-CSRFToken'
     sesh = Session()
-    url = 'http://homeserver/switch'
-    home_control_url = 'http://homeserver/home-control'
+    url = 'http://home-server-homeserver/switch'
+    home_control_url = 'http://home-server-homeserver/home-control'
     res = sesh.get(url=home_control_url, verify=False)
     print(res.content)
     res = sesh.post(url=url, json={'name': light_name, 'command': 'on'}, verify=False, headers={csrf_key: sesh.cookies['csrftoken'], 'Referer': home_control_url})
     print(res.content)
                                                                                                          
 
-def main():                                                                     
+def main():
+  # turn on vape regardless of sunset
+  turn_on_lights("Vape")                                                                 
   # Configure the timezone    
   tz = pytz.timezone(MY_TIMEZONE)                                                    
   loc = LocationInfo(name='SJC', region='CA, USA', timezone=pytz.UTC,
