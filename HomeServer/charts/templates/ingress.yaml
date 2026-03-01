@@ -12,6 +12,7 @@ spec:
     - grantmoisturemeter.com
     - llasearch.com
     - mitchellho.me
+    - mikeychloe.com
     # - api.stakswipe.com
     # - api.celniker.com
     # - api.mitchellvault.com
@@ -87,6 +88,16 @@ spec:
             name: home-assistant
             port:
               number: 8080
+  - host: mikeychloe.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wedding-website-frontend
+            port:
+              number: 80
   # - host: api.celniker.com
   #   http:
   #     paths:
